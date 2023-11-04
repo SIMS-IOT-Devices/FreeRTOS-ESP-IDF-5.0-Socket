@@ -1,4 +1,4 @@
-// UDP Server with WiFi connection communication via Socket
+// UDP SOCKET Server with WiFi connection communication via Socket
 
 #include <stdio.h>
 #include <string.h>
@@ -78,13 +78,19 @@ static void udp_server_task(void *pvParameters)
             ESP_LOGI(TAG, "Waiting for data");
             int len = recvfrom(sock, rx_buffer, sizeof(rx_buffer) - 1, 0, (struct sockaddr *)&source_addr, &socklen);
 
-            // Get the sender's ip address as string
-            inet_ntoa_r(((struct sockaddr_in *)&source_addr)->sin_addr, addr_str, sizeof(addr_str) - 1);
-
-            rx_buffer[len] = 0; // Null-terminate
-            ESP_LOGI(TAG, "Received %d bytes from %s:", len, addr_str);
-            ESP_LOGI(TAG, "%s", rx_buffer);
-            sendto(sock, rx_buffer, len, 0, (struct sockaddr *)&source_addr, sizeof(source_addr));
+            if (len > 0)
+            {
+                // Get the sender's ip address as string
+                inet_ntoa_r(((struct sockaddr_in *)&source_addr)->sin_addr, addr_str, sizeof(addr_str) - 1);
+                rx_buffer[len] = 0; // Null-terminate
+                ESP_LOGI(TAG, "Received %d bytes from %s:", len, addr_str);
+                ESP_LOGI(TAG, "%s", rx_buffer);
+                sendto(sock, rx_buffer, len, 0, (struct sockaddr *)&source_addr, sizeof(source_addr));
+            }
+            else
+            {
+                ESP_LOGI(TAG, "Did not received data");
+            }
         }
 
         if (sock != -1)
