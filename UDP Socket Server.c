@@ -1,4 +1,5 @@
 // UDP SOCKET Server with WiFi connection communication via Socket
+// Send data from the PC by ncat to the ESP32 and receive it on the ESP32 server.
 
 #include <stdio.h>
 #include <string.h>
@@ -150,3 +151,4 @@ void app_main(void)
     vTaskDelay(5000 / portTICK_PERIOD_MS);
     xTaskCreate(udp_server_task, "udp_server", 4096, (void *)AF_INET, 5, NULL);
 }
+
