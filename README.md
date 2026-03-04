@@ -6,3 +6,4 @@ ESP IDF 5.0 on ESP32 implementation of HTTP, TCP, and UDP Socket (WebSocket) con
 4. UDP Socket Server Receive.c - POST command from the Windows PC to ESP32 Socket Server via UDP connection
 5. UDP Socket Client - POST command from the ESP32 Socket Client to ESP32 Socket Server via UDP connection
 6. Send_UDP.py - This file can be used to send a UDP message from PC to ESP32
+7. UDP Socket Server Send.c - Send data from the ESP32 server via UDP.
