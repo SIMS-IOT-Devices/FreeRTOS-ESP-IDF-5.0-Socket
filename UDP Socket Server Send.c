@@ -122,7 +122,6 @@ void app_main(void)
 {
     wifi_connection();
     vTaskDelay(5000 / portTICK_PERIOD_MS);
-    // xTaskCreate(udp_server_task, "udp_server", 4096, (void *)AF_INET, 5, NULL);
     xTaskCreate(udp_sender_task, "udp_sender", 4096, (void *)AF_INET, 5, NULL);
-    // xTaskCreate(udp_sender_task, "udp_sender", 4096, NULL, 5, NULL);
 }
+
